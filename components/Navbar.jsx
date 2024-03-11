@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image'
 import { SignedOut, UserButton, SignedIn, useSession } from '@clerk/nextjs';
-import { checkUserRole } from '../utils/Utils';
+import { checkUserRole } from '../utils/utils';
 
 const Navbar = () => {
   const { session } = useSession();
@@ -48,7 +48,7 @@ const Navbar = () => {
         </nav>
         <div className='md:flex items-center'>
           <SignedOut>
-            <a href='/signin'>
+            <a href='/sign-in'>
               <button className='py-2.5 px-12 rounded text-white btn bg-gradient-to-r from-blue-600 to-blue-800 hover:opacity-80 transition-all duration-200'>
                 Login
               </button>

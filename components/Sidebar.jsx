@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { Dialog, Transition } from "@headlessui/react";
-import { useConnection } from "@context/connect"; //context/connect
+import { useConnection } from "@context/connect";
 import { useRouter } from "next/navigation";
 import { Fragment, useEffect, useState } from "react";
 
@@ -11,9 +11,8 @@ const Sidebar = () => {
     let [rooms, setRooms] = useState([]);
     let [user, setUser] = useState(null);
     let [isOpen, setIsOpen] = useState(false);
-    let [protectedRoom, setProtected] = useState(false);
+    let [privateRoom, setPrivate] = useState(false);
     let [password, setPassword] = useState('');
-    // const { connection } = useConnection();
     const connection = useConnection();
 
     
@@ -22,7 +21,7 @@ const Sidebar = () => {
             connection.emit('fetchUser');
             connection.on('user', data => {
                 if (data === null) {
-                    // router.push('/');
+                    router.push('/');
                 } else {
                     setUser(data);
                 }
@@ -31,7 +30,7 @@ const Sidebar = () => {
             return () => {
                 connection.off('user', data => {
                     if (data === null) {
-                        // router.push('/');
+                        router.push('/');
                     } else {
                         setUser(data);
                     }
@@ -62,7 +61,7 @@ const Sidebar = () => {
         const { id, passwordProtected } = room;
         if (passwordProtected) {
             setIsOpen(true);
-            setProtected(room);
+            setPrivate(room);
 
             if (password) {
                 connection.emit('joinRoom', { id, password });
@@ -76,10 +75,10 @@ const Sidebar = () => {
             if (data.success) {
                 setIsOpen(false);
                 setPassword('');
-                // router.push('/rooms/' + id);
+                router.push('/rooms/' + id);
             } else {
                 if (data?.alreadyIn) {
-                    // router.push('/rooms/' + id);
+                    router.push('/rooms/' + id);
                 } else {
                     alert(data.error)
                 }
@@ -123,15 +122,15 @@ const Sidebar = () => {
                                     as="h3"
                                     className="text-lg font-medium leading-6 text-white"
                                 >
-                                    Password Protected Room
+                                    Private Room
                                 </Dialog.Title>
                                 <form onSubmit={(e) => {
                                     e.preventDefault();
-                                    JoinRoom(protectedRoom);
+                                    JoinRoom(privateRoom);
                                 }}>
                                     <div className="mt-2">
                                         <p className="text-sm text-gray-300">
-                                            This room is password protected. Please enter the password to join.
+                                            This room is protected. Kindly enter the password to join.
                                         </p>
 
                                         <input
@@ -166,7 +165,7 @@ const Sidebar = () => {
             <div className="flex flex-col h-full mt-4 space-y-2">
                 {rooms.map(room => {
                     return <div key={room.id} className="flex flex-row items-center gap-2 p-2 pr-4 rounded-md hover:bg-zinc-500/5 transition-all duration-200 cursor-pointer" onClick={() => JoinRoom(room)}>
-                        <img src={`https://avatars.dicebear.com/api/initials/${room?.name || "No Name"}.png`} alt="username" className="w-10 h-10 rounded-md" />
+                        <img src="https://placehold.co/600x400.png" alt="username" className="w-10 h-10 rounded-md" />
                         <div className="flex-shrink-0 flex flex-col">
                             <span className="font-semibold">{room.name}</span>
                             <span className="text-xs text-gray-400">Created by {room?.owner?.username.split(0, 5) + '...'}</span>
@@ -184,7 +183,7 @@ const Sidebar = () => {
 
             <div className="flex flex-col items-center space-y-3 mt-6 w-full">
                 <div className="flex flex-row items-center space-x-2 w-full hover:bg-zinc-500/5 p-4 rounded-lg transition-all duration-200">
-                    <img src={`https://avatars.dicebear.com/api/micah/${user?.username || "clqu"}.png`} alt="username" className="h-10 w-10 rounded-full" />
+                    <img src="https://placehold.co/600x400.png" alt="username" className="h-10 w-10 rounded-full" />
                     <span className="font-semibold">{user?.username}</span>
                 </div>
             </div>

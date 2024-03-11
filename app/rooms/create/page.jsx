@@ -46,6 +46,36 @@ const Page = () => {
         }
     }, [connection]);
 
+
+    // const { connection } = useConnection();
+    // const router = useRouter();
+    // let [error, setError] = useState(null);
+  
+    const Login = event => {
+      event.preventDefault();
+      const username = event.target.username.value;
+      connection.emit('login', { username });
+      connection.on('login', data => {
+        if (data.success) {
+          router.push('/rooms');
+        } else {
+          setError(data.error);
+        }
+      });
+    }
+  
+    useEffect(() => {
+      if (connection) {
+        connection.emit('fetchUser');
+        connection.on('user', data => {
+          if (data !== null) {
+            router.push('/rooms');
+          }
+        });
+      }
+    }, []);
+
+    
     return <>
         <div className="flex">
             <Sidebar />
@@ -61,11 +91,11 @@ const Page = () => {
                         <form onSubmit={CreateRoom} className="my-8 w-96 h-auto">
                             <div className="relative mb-2">
                                 <label htmlFor="name" className="text-[12.5px] leading-tighter text-gray-300 uppercase font-medium text-base cursor-text">Room Name</label>
-                                <input id="name" autoComplete='off' className="text-white bg-dark-3 transition-all duration-200 w-full rounded-lg p-3 border border-gray-300/10 focus:border-blue-700 outline-none ring-none" type="text" />
+                                <input id="name" autoComplete='off' className="bg-dark-3 transition-all duration-200 w-full rounded-lg p-3 border border-gray-300/10 focus:border-blue-700 outline-none ring-none" type="text" />
                             </div>
                             <div className="relative mb-2">
                                 <label htmlFor="name" className="text-[12.5px] leading-tighter text-gray-300 uppercase font-medium text-base cursor-text">Password <span className="text-xs italic lowercase font-thin opacity-50">optional</span></label>
-                                <input id="password" autoComplete='off' className="text-white bg-dark-3 transition-all duration-200 w-full rounded-lg p-3 border border-gray-300/10 focus:border-blue-700 outline-none ring-none" type="text" />
+                                <input id="password" autoComplete='off' className="bg-dark-3 transition-all duration-200 w-full rounded-lg p-3 border border-gray-300/10 focus:border-blue-700 outline-none ring-none" type="text" />
                             </div>
                             <div className="space-y-9">
                                 <div className="text-sm flex justify-end items-center h-full mt-16">

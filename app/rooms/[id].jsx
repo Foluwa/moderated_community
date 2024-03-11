@@ -98,7 +98,7 @@ const Room =() => {
             <div className="col-span-9 w-full">
                 <div className="border-b border-zinc-500/5 flex items-center justify-between px-6 py-5 text-white">
                     <div className="flex items-center">
-                        <img src={`https://avatars.dicebear.com/api/initials/${room?.name || "No Name"}.png`} alt="username" className="w-14 h-14 rounded-full" />
+                        <img src="https://placehold.co/600x400.png" alt="username" className="w-14 h-14 rounded-full" />
                         <div className="ml-3">
                             <p className="text-lg font-medium">{room?.name}</p>
                             <p className="text-xs font-medium italic text-gray-500">{members?.length} members</p>
@@ -136,11 +136,11 @@ const Room =() => {
                                             </div>
                                             <p className="text-xs text-gray-500">{dateNow(message.date)}</p>
                                         </div>
-                                        <img src={`https://avatars.dicebear.com/api/micah/${message.user?.username || "No Name"}.png`} alt="username" className="w-10 h-10 rounded-full" />
+                                        <img src="https://placehold.co/600x400.png" alt="username" className="w-10 h-10 rounded-full" />
                                     </div>
                                 } else {
                                     return <div key={index} className="flex justify-start items-center gap-2">
-                                        <img src={`https://avatars.dicebear.com/api/micah/${message.user?.username || "No Name"}.png`} alt="username" className="w-10 h-10 rounded-full" />
+                                        <img src="https://placehold.co/600x400.png" alt="username" className="w-10 h-10 rounded-full" />
                                         <div className="flex flex-col items-start">
                                             <p className="text-xs text-gray-500">{message.user.username}</p>
                                             <div className="bg-zinc-500/10 rounded-xl p-3">
@@ -180,7 +180,7 @@ const Room =() => {
                     {members?.map(member => (
                         <div className="flex items-center justify-between px-6 py-5 text-white bg-zinc-500/5 rounded-lg">
                             <div className="flex items-center w-full">
-                                <img src={`https://avatars.dicebear.com/api/micah/${member?.username || "No Name"}.png`} alt="username" className="w-10 h-10 rounded-full" />
+                                <img src="https://placehold.co/600x400.png" alt="username" className="w-10 h-10 rounded-full" />
                                 <div className="ml-3 flex items-center justify-between gap-2 w-full">
                                     <p className="text-sm font-medium">{member?.username}</p>
                                     {room?.owner?.username === member?.username && <>
