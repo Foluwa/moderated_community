@@ -10,15 +10,10 @@
 
 * {
   font-family: 'Poppins', sans-serif;
-  /* border: red solid 2px; */
 }
 
 body {
   background-color: #111214;
   overflow-x: hidden;
   overflow-y: hidden;
-}
-
-.justify-between {
-    /* background: black; */
 }
