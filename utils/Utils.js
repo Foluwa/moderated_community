@@ -1,4 +1,5 @@
 const checkUserRole = (session) => {
+  console.log('checkUserRole',  session);
   if (
     !session ||
     !session.user ||
@@ -20,6 +21,7 @@ const checkUserRole = (session) => {
 }
 
 const getUserRole = (session) => {
+  console.log('getUserRole',  session);
   // Check if the user session exists and the has user data
   if (session && session.user && session.user.organizationMemberships) {
     const organizationMemberships = session.user.organizationMemberships;

@@ -6,7 +6,8 @@ import { useEffect, useState } from 'react';
 import Sidebar from '../../../components/Sidebar';
 
 const Page = () => {
-    const connection = useConnection();
+    // const connection = useConnection();
+    const { connection } = useConnection();
     const router = useRouter();
     let [error, setError] = useState(null);
 

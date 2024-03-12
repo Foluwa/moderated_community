@@ -13,7 +13,7 @@ const Sidebar = () => {
     let [isOpen, setIsOpen] = useState(false);
     let [privateRoom, setPrivate] = useState(false);
     let [password, setPassword] = useState('');
-    const connection = useConnection();
+    const { connection } = useConnection();
 
     
     useEffect(() => {

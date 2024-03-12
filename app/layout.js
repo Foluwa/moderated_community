@@ -1,17 +1,16 @@
+"use client"
+
 import '@styles/globals.css';
 import Navbar from '@components/Navbar';
+import { Provider as ConnectionProvider } from '../context/connect'
 import { ClerkProvider} from '@clerk/nextjs';
 import { Footer } from '@components';
-
-export const metadata = {
-  title: 'MediaBeast',
-  description: 'Moderated Community Application',
-};
 
 const RootLayout = ({ children }) => {
   return (
     <ClerkProvider>
-        <html lang='en'>
+       <ConnectionProvider>
+       <html lang='en'>
           <body>
             <div className='main'>
               <div className='gradient' />
@@ -23,6 +22,8 @@ const RootLayout = ({ children }) => {
             </main>
           </body>
         </html>
+       </ConnectionProvider>
+
     </ClerkProvider>
   );
 }
